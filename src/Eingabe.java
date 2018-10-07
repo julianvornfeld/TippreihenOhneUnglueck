@@ -14,5 +14,10 @@ public class Eingabe {
 	    
 		return number;
 	}
-
+	
+	public int GetNumUnluckNumbers() {
+		System.out.print ("Geben Sie die Anzahl der Unglückszahlen ein, die Sie eingeben möchten: ");
+	    int number = scanner.nextInt();
+    	return number;
+	}
 }

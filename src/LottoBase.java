@@ -21,7 +21,8 @@ public class LottoBase {
 	}
 	
 	public void SetUnluckyNumbers() {
-		unluckynumbers = new int[3];
+		int numunluckynumbers = eingabe.GetNumUnluckNumbers();
+		unluckynumbers = new int[numunluckynumbers];
 
         int count = 0;
         do {	
@@ -34,7 +35,7 @@ public class LottoBase {
     			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
         	}
         	
-        } while (count < 3);
+        } while (count < numunluckynumbers);
 	}
 	
 	private int[] SortNumbers(int[] numbers) {
