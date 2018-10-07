@@ -1,8 +1,10 @@
 
 public class Lotto extends LottoBase implements ILottoBase {
 
-	public Lotto(int first, int second, int third) {
-		super(first, second, third, 49);
+	public Lotto() {
+		super(49);
+		
+		SetUnluckyNumbers();
 	}
 
 	@Override

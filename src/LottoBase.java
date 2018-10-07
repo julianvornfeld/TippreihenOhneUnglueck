@@ -4,12 +4,14 @@ public class LottoBase {
 	
 	public int[] unluckynumbers;
 	private int MaxNr;
-	public LottoBase(int first, int second, int third, int MaxNr) {
-		this.MaxNr = MaxNr;
-		SetUnluckyNumbers(first, second, third);
-	}
+	public Eingabe eingabe;
 	
-	private int CheckValidity(int number) {
+	public LottoBase(int MaxNr) {
+		this.MaxNr = MaxNr;
+		eingabe = new Eingabe();
+	}
+
+	public int CheckValidity(int number) {
 		int returnval = number;
 		if (number > this.MaxNr) {
 			System.out.println("Fehler! Die eingegebene Zahl darf nicht größer als " + MaxNr + " sein!");
@@ -18,11 +20,21 @@ public class LottoBase {
 		return returnval;
 	}
 	
-	public void SetUnluckyNumbers(int first, int second, int third) {
+	public void SetUnluckyNumbers() {
 		unluckynumbers = new int[3];
-		unluckynumbers[0] = CheckValidity(first);
-		unluckynumbers[1] = CheckValidity(second);
-		unluckynumbers[2] = CheckValidity(third);
+
+        int count = 0;
+        do {	
+        	int number = CheckValidity(eingabe.GetUnluckyNumber(count + 1)); 
+        	boolean notexists = CheckValidity(unluckynumbers, number); 
+        	if (number > 0 && notexists==true) {
+        		unluckynumbers[count] = number;
+                count++;	
+        	} else if (number > 0 && notexists==false) {
+    			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
+        	}
+        	
+        } while (count < 3);
 	}
 	
 	private int[] SortNumbers(int[] numbers) {

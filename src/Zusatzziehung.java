@@ -1,8 +1,13 @@
 
 public class Zusatzziehung extends LottoBase implements ILottoBase {
 
-	public Zusatzziehung(int first, int second, int third) {
-		super(first, second, third, 10);
+	public Zusatzziehung(int[] unluckynumbers) {
+		super(10);
+
+		this.unluckynumbers = new int[3];
+		this.unluckynumbers[0] = unluckynumbers[0];
+		this.unluckynumbers[1] = unluckynumbers[1];
+		this.unluckynumbers[2] = unluckynumbers[2];	
 	}
 
 	public String GetZahlenreihe() {
