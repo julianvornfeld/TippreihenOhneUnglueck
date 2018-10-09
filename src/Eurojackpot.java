@@ -2,11 +2,10 @@
 public class Eurojackpot extends LottoBase implements ILottoBase {
 	private Zusatzziehung Zusatz;
 	
-	public Eurojackpot() {
-		super(50);
-		SetUnluckyNumbers();
+	public Eurojackpot(int[] UnluckyNumbers) {
+		super(50, UnluckyNumbers);
 		
-		Zusatz = new Zusatzziehung(unluckynumbers);
+		Zusatz = new Zusatzziehung(UnluckyNumbers);
 	}
 	
 	public String GetZahlenreihe() {

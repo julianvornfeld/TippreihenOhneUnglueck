@@ -2,40 +2,28 @@ import java.util.Random;
 
 public class LottoBase {
 	
-	public int[] unluckynumbers;
+	public int[] UnluckyNumbers;
 	private int MaxNr;
-	public Eingabe eingabe;
+	public UserInterface eingabe;
 	
-	public LottoBase(int MaxNr) {
+	public LottoBase(int MaxNr, int[] UnluckyNumbers) {
 		this.MaxNr = MaxNr;
-		eingabe = new Eingabe();
+		this.UnluckyNumbers = UnluckyNumbers.clone();
+		
+		for(int count=0; count<this.UnluckyNumbers.length; count++) {
+			this.UnluckyNumbers[count] = CheckValidity(this.UnluckyNumbers[count]);
+		}
+
+		eingabe = new UserInterface();
 	}
 
 	public int CheckValidity(int number) {
 		int returnval = number;
 		if (number > this.MaxNr) {
-			System.out.println("Fehler! Die eingegebene Zahl darf nicht größer als " + MaxNr + " sein!");
+			System.out.println("Warnung! Die Unglückszahl '" + number + "'darf nicht größer als " + MaxNr + " sein und wird Ignoriert");
 			returnval = 0;
 		}
 		return returnval;
-	}
-	
-	public void SetUnluckyNumbers() {
-		int numunluckynumbers = eingabe.GetNumUnluckNumbers();
-		unluckynumbers = new int[numunluckynumbers];
-
-        int count = 0;
-        do {	
-        	int number = CheckValidity(eingabe.GetUnluckyNumber(count + 1)); 
-        	boolean notexists = CheckValidity(unluckynumbers, number); 
-        	if (number > 0 && notexists==true) {
-        		unluckynumbers[count] = number;
-                count++;	
-        	} else if (number > 0 && notexists==false) {
-    			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
-        	}
-        	
-        } while (count < numunluckynumbers);
 	}
 	
 	private int[] SortNumbers(int[] numbers) {
@@ -63,9 +51,9 @@ public class LottoBase {
         	}
 		}
 
-		for(int cntnumbers=0; cntnumbers < unluckynumbers.length; cntnumbers++) {
+		for(int cntnumbers=0; cntnumbers < UnluckyNumbers.length; cntnumbers++) {
 			
-        	if (unluckynumbers[cntnumbers] == newnumber) {
+        	if (UnluckyNumbers[cntnumbers] == newnumber) {
         		valid = false;
         	}
 		}

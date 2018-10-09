@@ -1,0 +1,4 @@
+Entwicklerdoku
+- Diagramme
+	- Flussdiagramm
+	- Klassendiagramm
