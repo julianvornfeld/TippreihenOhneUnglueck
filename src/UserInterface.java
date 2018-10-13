@@ -1,63 +1,90 @@
 import java.util.Scanner;
-
+/**
+ * This class is for Userinput at the command line or to put out messages to the user.
+ *  
+ * @author Julian
+ *
+ */
 public class UserInterface {
-	public Scanner scanner;
+	public Scanner Scanner;
 	
 	public UserInterface () {
-		scanner = new Scanner (System.in);	
+		Scanner = new Scanner (System.in);	
 	}
 
-	public int GetUnluckyNumber(int number) {
-		System.out.print ("Geben Sie die " + number + ". Unglückszahl ein oder tippen Sie 'n' zum Abbrechen: ");
-		String ReturnVal = scanner.next(); 
-		if (ReturnVal.equalsIgnoreCase("n")) {
-			number = 0;
-		} else {
-			number = Integer.parseInt(ReturnVal);
-		}
-		return number;
-	}
-	
-	public boolean CheckValidity (int[] numbers, int newnumber) {
-		boolean valid = true;
+	/**
+	 * This method checks if the input number (NewNumber) is already in the input array (Numbers).
+	 * If that's the case, "False" is the output.
+	 * 
+	 * @param A number (NewNumber) which should be checked and an array to check with. 
+	 * @return Returns "false" if the numbers is in the input array 
+	 */
+	public boolean CheckValidity (int[] Numbers, int NewNumber) {
+		boolean Valid = true;
 
-		for(int cntnumbers=0; cntnumbers < numbers.length; cntnumbers++) {
+		for(int CntNumbers=0; CntNumbers < Numbers.length; CntNumbers++) {
 			
-        	if (numbers[cntnumbers] == newnumber) {
-        		valid = false;
+        	if (Numbers[CntNumbers] == NewNumber) {
+        		Valid = false;
         	}
 		}
-		return valid;
+		return Valid;
 	}
-	
+
+	/**
+	 * This method is intended for user input of all unlucky numbers.
+	 * The userinput stops only, when the user types a 'n' instead of the number.
+	 *  
+	 * @return Returns an array with variable length and unlucky numbers
+	 */
 	public int[] SetUnluckyNumbers() {
-		//int numunluckynumbers = GetNumUnluckNumbers();
-		int[] temp = new int[50];
-		boolean cancel = false;
+		int[] Temp = new int[50];
+		boolean Cancel = false;
 		
-        int count = 0;
+        int Count = 0;
         do {	
-        	int number = GetUnluckyNumber(count + 1); 
-        	boolean notexists = CheckValidity(temp, number); 
-        	if (number > 0 && notexists==true) {
-        		temp[count] = number;
-                count++;	
-        	} else if (number > 0 && notexists==false) {
+        	int Number = GetUnluckyNumber(Count + 1); 
+        	boolean NotExists = CheckValidity(Temp, Number); 
+        	if (Number > 0 && NotExists==true) {
+        		Temp[Count] = Number;
+                Count++;	
+        	} else if (Number > 0 && NotExists==false) {
     			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
-        	} else if (number == 0) {
-        		cancel = true;
+        	} else if (Number == 0) {
+        		Cancel = true;
         	}
         	
-        } while (cancel == false);
+        } while (Cancel == false);
         
-        int[] UnluckyNumbers = new int[count];
-		for(int cntnumbers=0; cntnumbers < count; cntnumbers++) {
-			UnluckyNumbers[cntnumbers] = temp[cntnumbers];
+        int[] UnluckyNumbers = new int[Count];
+		for(int CntNumbers=0; CntNumbers < Count; CntNumbers++) {
+			UnluckyNumbers[CntNumbers] = Temp[CntNumbers];
 		}
         
         return UnluckyNumbers;
 	}
 	
+	/**
+	 * This method is intended for user input of unlucky numbers and will be called by SetUnluckyNumbers().
+	 * if the user types a 'n' instead of a number, the ouput will be a zero instead of the userinput.
+	 * 
+	 * @param The number of unlucky numbers already entered by the user
+	 * @return Returns the userinput or a zero, if the user what's to stop
+	 */
+	public int GetUnluckyNumber(int Number) {
+		System.out.print ("Geben Sie die " + Number + ". Unglückszahl ein oder tippen Sie 'n' zum Abbrechen: ");
+		String ReturnVal = Scanner.next(); 
+		if (ReturnVal.equalsIgnoreCase("n")) {
+			Number = 0;
+		} else {
+			Number = Integer.parseInt(ReturnVal);
+		}
+		return Number;
+	}
+	
+	/**
+	 * Sends a help message to the user, for more information about the program
+	 */
 	public void Help() {
 		System.out.println("Der Aufruf muss wie folgt aussehen:\n"
 							+ "\n"
@@ -68,6 +95,10 @@ public class UserInterface {
 	        				+ "'unglueckszahlen ausgabe' gibt die Unglückszahlen aus\n"
 	        				+ "'unglueckszahlen eingabe' startet die Eingabe neuer Unglückszahlen" );
 	}
+	
+	/**
+	 * Sends a help message to the user, for more information about the unlucky numbers
+	 */
 	public void HelpUnluckyNumbers() {
 		System.out.println("Der Aufruf muss wie folgt aussehen:\n"
 				+ "\n"

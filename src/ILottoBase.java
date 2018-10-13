@@ -1,4 +1,4 @@
 
 public interface ILottoBase {
-	public String GetZahlenreihe();
+	public String GetNumbersString();
 }

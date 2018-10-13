@@ -6,15 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TippreihenOhneUnglueck {
-	public static LottoBase spiel;
-	public static int[] UnluckyNumbers; //Muss noch geladen und gespeichert werden
+	public static int[] UnluckyNumbers; 
+	
     public static void main(String[] args) throws IOException{
-    	String typ = "lotto";
+    	String Type = "lotto";
 
     	UserInterface Interface = new UserInterface();
     			
     	if (args.length > 0) {
-    		typ = args[0];
+    		Type = args[0];
     	}
     	
     	UnluckyNumbers = ReadFile();
@@ -23,19 +23,17 @@ public class TippreihenOhneUnglueck {
     		WriteFile(UnluckyNumbers);
     	}
     	
-    	if (typ.equalsIgnoreCase("help")) {
+    	if (Type.equalsIgnoreCase("help")) {
     		Interface.Help();
-    	} else if (typ.equalsIgnoreCase("eurojackpot")) {
+    	} else if (Type.equalsIgnoreCase("eurojackpot")) {
         	System.out.println("Willkommen bei Eurojackpot Generator!");
     		Eurojackpot Euro = new Eurojackpot(UnluckyNumbers);
-    		System.out.println(Euro.GetZahlenreihe());
-    		spiel = Euro;
-        } else if (typ.equalsIgnoreCase("lotto")) {
+    		System.out.println(Euro.GetNumbersString());
+        } else if (Type.equalsIgnoreCase("lotto")) {
         	System.out.println("Willkommen bei Lotto Generator!");
     		Lotto Lotto = new Lotto(UnluckyNumbers);
-    		System.out.println(Lotto.GetZahlenreihe());
-    		spiel = Lotto;
-        } else if (typ.equalsIgnoreCase("unglueckszahlen")) {
+    		System.out.println(Lotto.GetNumbersString());
+        } else if (Type.equalsIgnoreCase("unglueckszahlen")) {
         	if (args.length == 1) {
         		Interface.HelpUnluckyNumbers();
         	} else {
@@ -54,11 +52,11 @@ public class TippreihenOhneUnglueck {
     
     public static String GetUnluckyNumbers() {
     	String Output = "Unglückszahlen: ";
-        for (int count = 0; count < UnluckyNumbers.length; count++) {
-	        if (count > 0) {
+        for (int Count = 0; Count < UnluckyNumbers.length; Count++) {
+	        if (Count > 0) {
 	        	Output = Output + " ";
 	        }
-	        int item = UnluckyNumbers[count];
+	        int item = UnluckyNumbers[Count];
 	        Output = Output + item;
 	    }
         return Output;
@@ -70,11 +68,11 @@ public class TippreihenOhneUnglueck {
 
         String UnluckyNumbersString = InputFileBuffer.readLine();
         
-        String[] temp = UnluckyNumbersString.split(";");
-        int[] UnluckyNumbers = new int[temp.length];
+        String[] Temp = UnluckyNumbersString.split(";");
+        int[] UnluckyNumbers = new int[Temp.length];
         
-		for(int cntnumbers=0; cntnumbers < temp.length; cntnumbers++) {
-			UnluckyNumbers[cntnumbers] = Integer.parseInt(temp[cntnumbers]);
+		for(int CntNumbers=0; CntNumbers < Temp.length; CntNumbers++) {
+			UnluckyNumbers[CntNumbers] = Integer.parseInt(Temp[CntNumbers]);
 		}
         InputFileBuffer.close();
         return UnluckyNumbers;
@@ -84,12 +82,12 @@ public class TippreihenOhneUnglueck {
         FileWriter InputFile = new FileWriter("UnluckyNumbers.txt");
         BufferedWriter OutputFileBuffer = new BufferedWriter(InputFile);
 	    String Output = "";
-        for (int count = 0; count < UnluckyNumbers.length; count++) {
-	        if (count > 0) {
+        for (int Count = 0; Count < UnluckyNumbers.length; Count++) {
+	        if (Count > 0) {
 	        	Output = Output + ";";
 	        }
-	        int item = UnluckyNumbers[count];
-	        Output = Output + item;
+	        int Item = UnluckyNumbers[Count];
+	        Output = Output + Item;
 	    }
 	    
         OutputFileBuffer.write(Output); 
