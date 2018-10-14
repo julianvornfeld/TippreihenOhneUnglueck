@@ -1,6 +1,0 @@
-Eingabe der Unglückszahlen:  Prüfung für 1 - 50
-
-Entwicklerdoku
-- Diagramme
-	- Flussdiagramm
-	- Klassendiagramm
