@@ -1,0 +1,6 @@
+Okt 14, 2018 3:18:14 PM TippreihenOhneUnglueck ReadFile
+INFORMATION: Die Datei 'UnluckyNumbers.txt' wurde eingelesen
+Okt 14, 2018 3:18:14 PM TippreihenOhneUnglueck main
+INFORMATION: Der User hat die Eingabe der Unglückszahlen gestartet
+Okt 14, 2018 3:18:33 PM TippreihenOhneUnglueck WriteFile
+INFORMATION: Die Unglückszahlen wurden in die Datei 'UnluckyNumbers.txt' geschrieben

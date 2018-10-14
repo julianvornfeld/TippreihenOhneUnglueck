@@ -5,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 /**
  * This is the class, which will be called by the user from the commandline
  * 
@@ -13,6 +18,7 @@ import java.io.IOException;
  */
 public class TippreihenOhneUnglueck {
 	public static int[] UnluckyNumbers; 
+	public static Logger Log;
 	
 	/**
 	 * This is the main method and can called by the user with parameters.
@@ -26,11 +32,26 @@ public class TippreihenOhneUnglueck {
 	 * "hilfe" outputs the help to the console
 	 * 
 	 */
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args){
     	String Type = "lotto";
 
     	UserInterface Interface = new UserInterface();
-    			
+
+	    Log = Logger.getLogger("MyLog");  
+	    FileHandler File;  
+
+	    try {
+		    File = new FileHandler(GetCurrentTimestamp() + "_logfile.log");  
+		    Log.addHandler(File);
+	        SimpleFormatter Format = new SimpleFormatter();  
+	        File.setFormatter(Format);
+	        Log.setUseParentHandlers(false);	
+	    } catch (SecurityException e) {  
+	        e.printStackTrace();  
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    }  
+    	
     	if (args.length > 0) {
     		Type = args[0];
     	}
@@ -38,14 +59,15 @@ public class TippreihenOhneUnglueck {
     	UnluckyNumbers = ReadFile();
     	
     	if (Type.equalsIgnoreCase("hilfe")) {
+		    Log.info("Der User hat die Hilfe aufgerufen"); 
     		Interface.Help();
-    	} else if (Type.equalsIgnoreCase("eurojackpot")) {
+    	} else if (Type.equalsIgnoreCase("eurojackpot")) { 
         	System.out.println("Willkommen bei Eurojackpot Generator!");
-    		Eurojackpot Euro = new Eurojackpot(UnluckyNumbers);
+    		Eurojackpot Euro = new Eurojackpot(UnluckyNumbers, Log);
     		System.out.println(Euro.GetNumbersString());
         } else if (Type.equalsIgnoreCase("lotto")) {
         	System.out.println("Willkommen bei Lotto Generator!");
-    		Lotto Lotto = new Lotto(UnluckyNumbers);
+    		Lotto Lotto = new Lotto(UnluckyNumbers, Log);
     		System.out.println(Lotto.GetNumbersString());
         } else if (Type.equalsIgnoreCase("unglueckszahlen")) {
         	if (args.length == 1) {
@@ -53,8 +75,10 @@ public class TippreihenOhneUnglueck {
         	} else {
             	String input = args[1];
             	if (input.equalsIgnoreCase("ausgabe")) {
+        		    Log.info("Der User hat die Ausgabe der Unglückszahlen gestartet"); 
                     System.out.println(GetUnluckyNumbers());
             	} else if (input.equalsIgnoreCase("eingabe")) {
+        		    Log.info("Der User hat die Eingabe der Unglückszahlen gestartet"); 
             		UnluckyNumbers = Interface.SetUnluckyNumbers();	
             		if (UnluckyNumbers.length > 0) {
                 		WriteFile(UnluckyNumbers);	
@@ -64,9 +88,16 @@ public class TippreihenOhneUnglueck {
             	}
         	}
         } else {
+		    Log.info("Fehlerhafte Eingabe vom User: '" + args[1] + ","); 
     		Interface.Help();
         }
     } 
+    
+    public static String GetCurrentTimestamp() {
+	   DateTimeFormatter Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");  
+	   LocalDateTime DateTime = LocalDateTime.now();  
+	   return Format.format(DateTime); 
+    }
     
     /**
      * This method put a String with the unlucky numbers out
@@ -96,25 +127,38 @@ public class TippreihenOhneUnglueck {
      * 
      * @return Returns the value of the file in an array "UnluckyNumbers" 
      */
-    public static int[] ReadFile () throws IOException {
+    public static int[] ReadFile ()  {
     	File File = new File("UnluckyNumbers.txt");
 
         int[] UnluckyNumbers = null;
         
     	if (File.exists()) {
-	        FileReader InputFile = new FileReader("UnluckyNumbers.txt");
-	        BufferedReader InputFileBuffer = new BufferedReader(InputFile);
-	
-	        String UnluckyNumbersString = InputFileBuffer.readLine();
-	        
-	        String[] Temp = UnluckyNumbersString.split(";");
-	        UnluckyNumbers = new int[Temp.length];
-	        
-			for(int CntNumbers=0; CntNumbers < Temp.length; CntNumbers++) {
-				UnluckyNumbers[CntNumbers] = Integer.parseInt(Temp[CntNumbers]);
+	        FileReader InputFile;
+			try {
+				InputFile = new FileReader("UnluckyNumbers.txt");
+		        BufferedReader InputFileBuffer = new BufferedReader(InputFile);
+		
+		        String UnluckyNumbersString = InputFileBuffer.readLine();
+		        
+		        String[] Temp = UnluckyNumbersString.split(";");
+		        UnluckyNumbers = new int[Temp.length];
+		        
+				for(int CntNumbers=0; CntNumbers < Temp.length; CntNumbers++) {
+					UnluckyNumbers[CntNumbers] = Integer.parseInt(Temp[CntNumbers]);
+				}
+		        InputFileBuffer.close();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-	        InputFileBuffer.close();
-    	} 
+	        
+		    Log.info("Die Datei 'UnluckyNumbers.txt' wurde eingelesen"); 
+    	} else {
+		    Log.info("Die Datei 'UnluckyNumbers.txt' wurde nicht gefunden"); 
+    	}
+    	
         return UnluckyNumbers;
     }
 
@@ -124,19 +168,25 @@ public class TippreihenOhneUnglueck {
      * 
      * @param An int array "UnluckyNumbers" with variable length 
      */
-    public static void WriteFile(int[] UnluckyNumbers) throws IOException {
-        FileWriter InputFile = new FileWriter("UnluckyNumbers.txt");
-        BufferedWriter OutputFileBuffer = new BufferedWriter(InputFile);
-	    String Output = "";
-        for (int Count = 0; Count < UnluckyNumbers.length; Count++) {
-	        if (Count > 0) {
-	        	Output = Output + ";";
-	        }
-	        int Item = UnluckyNumbers[Count];
-	        Output = Output + Item;
-	    }
-	    
-        OutputFileBuffer.write(Output); 
-        OutputFileBuffer.close();
+    public static void WriteFile(int[] UnluckyNumbers) {
+        FileWriter InputFile;
+		try {
+			InputFile = new FileWriter("UnluckyNumbers.txt");
+	        BufferedWriter OutputFileBuffer = new BufferedWriter(InputFile);
+		    String Output = "";
+	        for (int Count = 0; Count < UnluckyNumbers.length; Count++) {
+		        if (Count > 0) {
+		        	Output = Output + ";";
+		        }
+		        int Item = UnluckyNumbers[Count];
+		        Output = Output + Item;
+		    }
+		    
+	        OutputFileBuffer.write(Output); 
+	        OutputFileBuffer.close();
+		    Log.info("Die Unglückszahlen wurden in die Datei 'UnluckyNumbers.txt' geschrieben"); 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }

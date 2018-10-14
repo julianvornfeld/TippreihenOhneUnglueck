@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 /**
  * This class inherits the class "LottoBase" and implements the interface "ILottoBase".
  * Lotto outputs a String of winning numbers.
@@ -8,8 +10,9 @@
  */
 public class Lotto extends LottoBase implements ILottoBase {
 
-	public Lotto(int[] UnluckyNumbers) {
-		super(49, UnluckyNumbers);
+	public Lotto(int[] UnluckyNumbers, Logger Log) {
+		super(49, UnluckyNumbers, Log);
+	    Log.info("Der User hat den Lotto Generator gestartet"); 
 	}
 
 	/**
@@ -24,7 +27,8 @@ public class Lotto extends LottoBase implements ILottoBase {
 		for(int CntNumbers=0; CntNumbers < WinningNumbers.length; CntNumbers++) {
 			ReturnVal += WinningNumbers[CntNumbers] + " ";
 		}
-		
+
+	    Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal);
 		return ReturnVal;
 	}
 

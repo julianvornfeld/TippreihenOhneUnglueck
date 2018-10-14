@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 /**
  * This class inherits the class "LottoBase" and implements the interface "ILottoBase".
  * Eurojackpot outputs a String of winning numbers.
@@ -9,10 +11,11 @@
 public class Eurojackpot extends LottoBase implements ILottoBase {
 	private Zusatzziehung Zusatz;
 	
-	public Eurojackpot(int[] UnluckyNumbers) {
-		super(50, UnluckyNumbers);
+	public Eurojackpot(int[] UnluckyNumbers, Logger Log) {
+		super(50, UnluckyNumbers, Log);
+	    Log.info("Der User hat den Eurojackpot Generator gestartet");
 		
-		Zusatz = new Zusatzziehung(UnluckyNumbers);
+		Zusatz = new Zusatzziehung(UnluckyNumbers, Log);
 	}
 	
 	/**
@@ -28,7 +31,9 @@ public class Eurojackpot extends LottoBase implements ILottoBase {
 			ReturnVal += WinningNumbers[CntNumbers] + " ";
 		}
 		ReturnVal += "\n" + Zusatz.GetNumbersString();
-		
+
+
+	    Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal);
 		return ReturnVal;
 	}
 }

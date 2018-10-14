@@ -44,6 +44,7 @@ public class UserInterface {
         int Count = 0;
         do {	
         	int Number = GetUnluckyNumber(Count + 1); 
+        	
         	boolean NotExists = CheckValidity(Temp, Number); 
         	if (Number > 0 && NotExists==true) {
         		Temp[Count] = Number;
@@ -52,7 +53,7 @@ public class UserInterface {
     			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
         	} else if (Number == 0) {
         		Cancel = true;
-        	}
+        	} 
         	
         } while (Cancel == false);
         
@@ -77,7 +78,13 @@ public class UserInterface {
 		if (ReturnVal.equalsIgnoreCase("n")) {
 			Number = 0;
 		} else {
-			Number = Integer.parseInt(ReturnVal);
+			try {
+				Number = Integer.parseInt(ReturnVal);	
+			} 
+			catch( Exception exception) {
+				System.out.println("Bitte geben Sie eine gültige Zahl ein!");
+				Number = -1; 
+			}
 		}
 		return Number;
 	}

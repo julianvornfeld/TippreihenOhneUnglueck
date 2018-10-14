@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 /**
  * This class inherits the class "LottoBase" and implements the interface "ILottoBase".
  * Zusatzziehung outputs a String of additional winning numbers.
@@ -8,8 +10,9 @@
  */
 public class Zusatzziehung extends LottoBase implements ILottoBase {
 
-	public Zusatzziehung(int[] UnluckyNumbers) {
-		super(10, UnluckyNumbers);
+	public Zusatzziehung(int[] UnluckyNumbers, Logger Log) {
+		super(10, UnluckyNumbers, Log);
+	    Log.info("Die Ziehung der Zusatzzahlen wurde gestartet"); 
 
 	}
 	
@@ -27,7 +30,8 @@ public class Zusatzziehung extends LottoBase implements ILottoBase {
 		for(int CntNumbers=0; CntNumbers < WinningNumbers.length; CntNumbers++) {
 			ReturnVal += WinningNumbers[CntNumbers] + " ";
 		}
-		
+
+	    Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal); 
 		return ReturnVal;
 	}
 
