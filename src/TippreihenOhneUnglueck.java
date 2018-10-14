@@ -17,7 +17,12 @@ import java.util.logging.SimpleFormatter;
  *
  */
 public class TippreihenOhneUnglueck {
+	/**
+	 * These are the unlucky numbers.
+	 * They are loaded from a file or typed in by as user
+	 */
 	public static int[] UnluckyNumbers; 
+	  
 	public static Logger Log;
 	
 	/**
