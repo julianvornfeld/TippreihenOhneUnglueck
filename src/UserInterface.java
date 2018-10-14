@@ -2,7 +2,7 @@ import java.util.Scanner;
 /**
  * This class is for Userinput at the command line or to put out messages to the user.
  *  
- * @author Julian
+ * @author Julian Vornfeld
  *
  */
 public class UserInterface {
