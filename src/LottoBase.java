@@ -13,21 +13,21 @@ public class LottoBase {
 	 * In that array are all unlucky numbers, who shout be ignored in GetNumbers().
 	 */
 	public int[] UnluckyNumbers;
-	
+
 	/**
 	 * An int variable with the maximum of numbers in the output array in GetNumbers() and the UnluckyNumbers array.
 	 */
 	private int MaxNr;
 
 	public Logger Log;
-	
+
 	public LottoBase(int MaxNr, int[] UnluckyNumbers, Logger Log) {
 		this.MaxNr = MaxNr;
 		this.UnluckyNumbers = UnluckyNumbers.clone();
 		this.Log = Log;
-		
+
 		String InvalidNumbers = "";
-		
+
 		for(int Count=0; Count<this.UnluckyNumbers.length; Count++) {
 			int Number = CheckValidity(this.UnluckyNumbers[Count]);
 			if (Number == 0) {
@@ -56,7 +56,7 @@ public class LottoBase {
 		}
 		return ReturnVal;
 	}
-	
+
 	/**
 	 * This method sorts the numbers in the input array (Numbers).
 	 * The sort direction is from low to high. 
@@ -73,13 +73,13 @@ public class LottoBase {
 					Numbers[j]=Numbers[j+1];
 					Numbers[j+1]=Temp;
 				}
-				
+
 			}
 		}
 		Log.info("Die Glückszahlen wurde aufsteigend sortiert"); 
 		return Numbers;
 	}
-	
+
 	/**
 	 * This method checks:
 	 * 1. Is the input number (NewNumber) already in the input array (Numbers).
@@ -92,24 +92,24 @@ public class LottoBase {
 	public boolean CheckValidity (int[] Numbers, int NewNumber) {
 
 		for(int CntNumbers=0; CntNumbers < Numbers.length; CntNumbers++) {
-			
-        	if (Numbers[CntNumbers] == NewNumber) {
-        		Log.info("Die generierte Zahl ist bereits in der Liste vorhanden"); 
-        		return false;
-        	}
+
+			if (Numbers[CntNumbers] == NewNumber) {
+				Log.info("Die generierte Zahl ist bereits in der Liste vorhanden"); 
+				return false;
+			}
 		}
 
 		for(int CntNumbers=0; CntNumbers < UnluckyNumbers.length; CntNumbers++) {
-			
-        	if (UnluckyNumbers[CntNumbers] == NewNumber) {
-        		Log.info("Die generierte Zahl ist eine Unglückszahl"); 
-        		return false;
-        	}
+
+			if (UnluckyNumbers[CntNumbers] == NewNumber) {
+				Log.info("Die generierte Zahl ist eine Unglückszahl"); 
+				return false;
+			}
 		}
 
 		return true;
 	}
-			
+
 	/**
 	 * This method outputs an int array with a given number of random numbers.
 	 * The number of random numbers, is specified in the input parameter "Drawings".
@@ -123,19 +123,19 @@ public class LottoBase {
 		int[] Numbers = new int[Drawings];
 
 		Log.info("Die Generierung " + Drawings  + " Glückszahlen " + MinNr + " bis " + MaxNr + " wurde gestartet"); 
-	    
+
 		Random Rand = new Random();
 
 		int Count = 0;
-	    do {
-	    	int NewNumber = Rand.nextInt((MaxNr - MinNr) + 1) + MinNr;
-	    	if (CheckValidity(Numbers, NewNumber)) {
-	    		Numbers[Count] = NewNumber;
-	        	Count++;	
-	    	}
-	    } while (Count < Numbers.length);
-	    
-	    Numbers = SortNumbers(Numbers);
-	    return Numbers;
+		do {
+			int NewNumber = Rand.nextInt((MaxNr - MinNr) + 1) + MinNr;
+			if (CheckValidity(Numbers, NewNumber)) {
+				Numbers[Count] = NewNumber;
+				Count++;	
+			}
+		} while (Count < Numbers.length);
+
+		Numbers = SortNumbers(Numbers);
+		return Numbers;
 	}
 }
