@@ -76,7 +76,7 @@ public class LottoBase {
 				
 			}
 		}
-	    Log.info("Die Glückszahlen wurde aufsteigend sortiert"); 
+		Log.info("Die Glückszahlen wurde aufsteigend sortiert"); 
 		return Numbers;
 	}
 	
@@ -122,7 +122,7 @@ public class LottoBase {
 		int MinNr = 1;
 		int[] Numbers = new int[Drawings];
 
-	    Log.info("Die Generierung " + Drawings  + " Glückszahlen " + MinNr + " bis " + MaxNr + " wurde gestartet"); 
+		Log.info("Die Generierung " + Drawings  + " Glückszahlen " + MinNr + " bis " + MaxNr + " wurde gestartet"); 
 	    
 	    Random Rand = new Random();
 
