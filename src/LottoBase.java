@@ -102,7 +102,7 @@ public class LottoBase {
 		for(int CntNumbers=0; CntNumbers < UnluckyNumbers.length; CntNumbers++) {
 			
         	if (UnluckyNumbers[CntNumbers] == NewNumber) {
-        	    Log.info("Die generierte Zahl ist eine Unglückszahl"); 
+        		Log.info("Die generierte Zahl ist eine Unglückszahl"); 
         		return false;
         	}
 		}
