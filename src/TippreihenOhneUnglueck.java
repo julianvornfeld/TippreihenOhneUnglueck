@@ -105,13 +105,13 @@ public class TippreihenOhneUnglueck {
 	} 
 	
 	public static String GetCurrentTimestamp() {
-	   DateTimeFormatter Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");  
-	   LocalDateTime DateTime = LocalDateTime.now();  
-	   return Format.format(DateTime); 
+		DateTimeFormatter Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");  
+		LocalDateTime DateTime = LocalDateTime.now();  
+		return Format.format(DateTime); 
 	}
 	
 	/**
-	 * This method put a String with the unlucky numbers out
+	 * This method returns a String with the unlucky numbers
 	 * 
 	 * @return A String (Output) with the unlucky numbers.
 	 */
