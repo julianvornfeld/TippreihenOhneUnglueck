@@ -51,7 +51,7 @@ public class LottoBase {
 	public int CheckValidity(int Number) {
 		int ReturnVal = Number;
 		if (Number > this.MaxNr) {
-		    Log.warning("Die Unglückszahl '" + Number + "'darf nicht größer als " + MaxNr + " sein und wird Ignoriert"); 
+			Log.warning("Die Unglückszahl '" + Number + "'darf nicht größer als " + MaxNr + " sein und wird Ignoriert"); 
 			ReturnVal = 0;
 		}
 		return ReturnVal;
