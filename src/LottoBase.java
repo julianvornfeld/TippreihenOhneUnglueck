@@ -124,18 +124,18 @@ public class LottoBase {
 
 		Log.info("Die Generierung " + Drawings  + " Glückszahlen " + MinNr + " bis " + MaxNr + " wurde gestartet"); 
 	    
-	    Random Rand = new Random();
+		Random Rand = new Random();
 
-        int Count = 0;
-        do {
-        	int NewNumber = Rand.nextInt((MaxNr - MinNr) + 1) + MinNr;
-        	if (CheckValidity(Numbers, NewNumber)) {
-            	Numbers[Count] = NewNumber;
-                Count++;	
-        	}
-        } while (Count < Numbers.length);
-        
-        Numbers = SortNumbers(Numbers);
-		return Numbers;
+		int Count = 0;
+	    do {
+	    	int NewNumber = Rand.nextInt((MaxNr - MinNr) + 1) + MinNr;
+	    	if (CheckValidity(Numbers, NewNumber)) {
+	    		Numbers[Count] = NewNumber;
+	        	Count++;	
+	    	}
+	    } while (Count < Numbers.length);
+	    
+	    Numbers = SortNumbers(Numbers);
+	    return Numbers;
 	}
 }
