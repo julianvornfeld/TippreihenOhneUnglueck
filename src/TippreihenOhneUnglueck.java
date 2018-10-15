@@ -69,7 +69,10 @@ public class TippreihenOhneUnglueck {
 		} else if (Type.equalsIgnoreCase("eurojackpot")) { 
 			System.out.println("Willkommen bei Eurojackpot Generator!");
 			if (UnluckyNumbers == null) {
-				UnluckyNumbers = Interface.SetUnluckyNumbers();	
+				UnluckyNumbers = Interface.SetUnluckyNumbers();
+				if (UnluckyNumbers.length > 0) {
+					WriteFile(UnluckyNumbers);	
+				}	
 			}
 			Eurojackpot Euro = new Eurojackpot(UnluckyNumbers, Log);
 			System.out.println(Euro.GetNumbersString());
@@ -77,6 +80,9 @@ public class TippreihenOhneUnglueck {
 			System.out.println("Willkommen bei Lotto Generator!");
 			if (UnluckyNumbers == null) {
 				UnluckyNumbers = Interface.SetUnluckyNumbers();	
+				if (UnluckyNumbers.length > 0) {
+					WriteFile(UnluckyNumbers);	
+				}
 			}
 			Lotto Lotto = new Lotto(UnluckyNumbers, Log);
 			System.out.println(Lotto.GetNumbersString());
