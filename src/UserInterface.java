@@ -47,6 +47,7 @@ public class UserInterface {
         	
         	boolean NotExists = CheckValidity(Temp, Number); 
         	if (Number > 0 && NotExists==true) {
+        		InvalidNumber = 3;
         		Temp[Count] = Number;
                 Count++;	
         	} else if (Number > 0 && NotExists==false) {
