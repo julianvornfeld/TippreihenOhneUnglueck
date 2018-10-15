@@ -35,7 +35,7 @@ class JUnitTest {
 			e.printStackTrace();  
 		}  
         
-        Base = new LottoBase(42, UnluckyNumbers, Log);
+		Base = new LottoBase(42, UnluckyNumbers, Log);
 	}
 
 	@org.junit.jupiter.api.Test
