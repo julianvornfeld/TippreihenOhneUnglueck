@@ -94,7 +94,7 @@ public class LottoBase {
 		for(int CntNumbers=0; CntNumbers < Numbers.length; CntNumbers++) {
 			
         	if (Numbers[CntNumbers] == NewNumber) {
-        	    Log.info("Die generierte Zahl ist bereits in der Liste vorhanden"); 
+        		Log.info("Die generierte Zahl ist bereits in der Liste vorhanden"); 
         		return false;
         	}
 		}
