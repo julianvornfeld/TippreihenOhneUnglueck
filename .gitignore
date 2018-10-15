@@ -2,3 +2,4 @@
 bin/UnluckyNumbers.txt
 *.log
 *.odt#
+test_logfile.log.1
