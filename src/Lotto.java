@@ -28,7 +28,7 @@ public class Lotto extends LottoBase implements ILottoBase {
 			ReturnVal += WinningNumbers[CntNumbers] + " ";
 		}
 
-	    Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal);
+		Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal);
 		return ReturnVal;
 	}
 
