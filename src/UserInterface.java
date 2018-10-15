@@ -20,15 +20,14 @@ public class UserInterface {
 	 * @return Returns "false" if the numbers is in the input array 
 	 */
 	public boolean CheckValidity (int[] Numbers, int NewNumber) {
-		boolean Valid = true;
 
 		for(int CntNumbers=0; CntNumbers < Numbers.length; CntNumbers++) {
 			
         	if (Numbers[CntNumbers] == NewNumber) {
-        		Valid = false;
+        		return false;
         	}
 		}
-		return Valid;
+		return true;
 	}
 
 	/**
@@ -40,6 +39,7 @@ public class UserInterface {
 	public int[] SetUnluckyNumbers() {
 		int[] Temp = new int[50];
 		boolean Cancel = false;
+		int InvalidNumber = 3;
 		
         int Count = 0;
         do {	
@@ -53,9 +53,11 @@ public class UserInterface {
     			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
         	} else if (Number == 0) {
         		Cancel = true;
-        	} 
+        	} else if (Number == -1) {
+        		InvalidNumber -= 1;
+        	}
         	
-        } while (Cancel == false);
+        } while (Cancel == false && InvalidNumber > 0);
         
         int[] UnluckyNumbers = new int[Count];
 		for(int CntNumbers=0; CntNumbers < Count; CntNumbers++) {

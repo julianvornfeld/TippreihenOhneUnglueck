@@ -90,25 +90,24 @@ public class LottoBase {
 	 * @return Returns "false" if the numbers is in the input or the UnluckyNumbers array 
 	 */
 	public boolean CheckValidity (int[] Numbers, int NewNumber) {
-		boolean Valid = true;
 
 		for(int CntNumbers=0; CntNumbers < Numbers.length; CntNumbers++) {
 			
         	if (Numbers[CntNumbers] == NewNumber) {
-        		Valid = false;
         	    Log.info("Die generierte Zahl ist bereits in der Liste vorhanden"); 
+        		return false;
         	}
 		}
 
 		for(int CntNumbers=0; CntNumbers < UnluckyNumbers.length; CntNumbers++) {
 			
         	if (UnluckyNumbers[CntNumbers] == NewNumber) {
-        		Valid = false;
         	    Log.info("Die generierte Zahl ist eine Unglückszahl"); 
+        		return false;
         	}
 		}
 
-		return Valid;
+		return true;
 	}
 			
 	/**
