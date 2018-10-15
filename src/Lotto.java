@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  */
 public class Lotto extends LottoBase implements ILottoBase {
-
+	
 	public Lotto(int[] UnluckyNumbers, Logger Log) {
 		super(49, UnluckyNumbers, Log);
 	    Log.info("Der User hat den Lotto Generator gestartet"); 

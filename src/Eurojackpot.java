@@ -21,7 +21,7 @@ public class Eurojackpot extends LottoBase implements ILottoBase {
 	/**
 	 * This method creates a String with a list winning numbers and additional winning numbers from the class "Zusatzziehung". 
 	 * 
-	 * @return A String with winning numbers (5 of 50) and additional winning numbers (2 of 10)
+	 * @return A String with winning numbers (5 of 50) and additional winning numbers (2 of 10).
 	 */
 	public String GetNumbersString() {
 		String ReturnVal = "Gewinnzahlen: ";

@@ -10,7 +10,7 @@ public class Test {
 		int[] UnluckyNumbers = {11,22,33}; 
 		
 		Logger Log = Logger.getLogger("MyLog");  
-	    FileHandler File;  
+		FileHandler File;  
 
 	    File = new FileHandler("test_logfile.log");  
 	    Log.addHandler(File);

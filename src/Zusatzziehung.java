@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  */
 public class Zusatzziehung extends LottoBase implements ILottoBase {
-
+	
 	public Zusatzziehung(int[] UnluckyNumbers, Logger Log) {
 		super(10, UnluckyNumbers, Log);
 	    Log.info("Die Ziehung der Zusatzzahlen wurde gestartet"); 
