@@ -9,10 +9,10 @@ import java.util.logging.Logger;
  *
  */
 public class Lotto extends LottoBase implements ILottoBase {
-	
+
 	public Lotto(int[] UnluckyNumbers, Logger Log) {
 		super(49, UnluckyNumbers, Log);
-	    Log.info("Der User hat den Lotto Generator gestartet"); 
+		Log.info("Der User hat den Lotto Generator gestartet"); 
 	}
 
 	/**
@@ -23,7 +23,7 @@ public class Lotto extends LottoBase implements ILottoBase {
 	public String GetNumbersString() {
 		String ReturnVal = "Gewinnzahlen: ";
 		int[] WinningNumbers = GetNumbers(6);
-		
+
 		for(int CntNumbers=0; CntNumbers < WinningNumbers.length; CntNumbers++) {
 			ReturnVal += WinningNumbers[CntNumbers] + " ";
 		}

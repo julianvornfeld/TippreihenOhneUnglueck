@@ -9,13 +9,13 @@ import java.util.logging.Logger;
  *
  */
 public class Zusatzziehung extends LottoBase implements ILottoBase {
-	
+
 	public Zusatzziehung(int[] UnluckyNumbers, Logger Log) {
 		super(10, UnluckyNumbers, Log);
-	    Log.info("Die Ziehung der Zusatzzahlen wurde gestartet"); 
+		Log.info("Die Ziehung der Zusatzzahlen wurde gestartet"); 
 
 	}
-	
+
 	/**
 	 * This method creates a String with a list winning numbers. 
 	 * 
@@ -23,7 +23,7 @@ public class Zusatzziehung extends LottoBase implements ILottoBase {
 	 */
 	public String GetNumbersString() {
 		String ReturnVal = "Gewinnzahlen: ";
-		
+
 		int[] WinningNumbers = GetNumbers(2);
 
 		ReturnVal += "Eurozahlen: ";
@@ -31,7 +31,7 @@ public class Zusatzziehung extends LottoBase implements ILottoBase {
 			ReturnVal += WinningNumbers[CntNumbers] + " ";
 		}
 
-	    Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal); 
+		Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal); 
 		return ReturnVal;
 	}
 

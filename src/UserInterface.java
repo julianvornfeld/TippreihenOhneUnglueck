@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class UserInterface {
 	public Scanner Scanner;
-	
+
 	public UserInterface () {
 		Scanner = new Scanner (System.in);	
 	}
@@ -22,10 +22,10 @@ public class UserInterface {
 	public boolean CheckValidity (int[] Numbers, int NewNumber) {
 
 		for(int CntNumbers=0; CntNumbers < Numbers.length; CntNumbers++) {
-			
-        	if (Numbers[CntNumbers] == NewNumber) {
-        		return false;
-        	}
+
+			if (Numbers[CntNumbers] == NewNumber) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -40,34 +40,34 @@ public class UserInterface {
 		int[] Temp = new int[50];
 		boolean Cancel = false;
 		int InvalidNumber = 3;
-		
-        int Count = 0;
-        do {	
-        	int Number = GetUnluckyNumber(Count + 1); 
-        	
-        	boolean NotExists = CheckValidity(Temp, Number); 
-        	if (Number > 0 && NotExists==true) {
-        		InvalidNumber = 3;
-        		Temp[Count] = Number;
-                Count++;	
-        	} else if (Number > 0 && NotExists==false) {
-    			System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
-        	} else if (Number == 0) {
-        		Cancel = true;
-        	} else if (Number == -1) {
-        		InvalidNumber -= 1;
-        	}
-        	
-        } while (Cancel == false && InvalidNumber > 0);
-        
-        int[] UnluckyNumbers = new int[Count];
+
+		int Count = 0;
+		do {	
+			int Number = GetUnluckyNumber(Count + 1); 
+
+			boolean NotExists = CheckValidity(Temp, Number); 
+			if (Number > 0 && NotExists==true) {
+				InvalidNumber = 3;
+				Temp[Count] = Number;
+				Count++;	
+			} else if (Number > 0 && NotExists==false) {
+				System.out.println("Fehler! Die eingegebene Zahl wurde bereits eingetragen!");
+			} else if (Number == 0) {
+				Cancel = true;
+			} else if (Number == -1) {
+				InvalidNumber -= 1;
+			}
+
+		} while (Cancel == false && InvalidNumber > 0);
+
+		int[] UnluckyNumbers = new int[Count];
 		for(int CntNumbers=0; CntNumbers < Count; CntNumbers++) {
 			UnluckyNumbers[CntNumbers] = Temp[CntNumbers];
 		}
-        
-        return UnluckyNumbers;
+
+		return UnluckyNumbers;
 	}
-	
+
 	/**
 	 * This method is intended for user input of unlucky numbers and will be called by SetUnluckyNumbers().
 	 * if the user types a 'n' instead of a number, the ouput will be a zero instead of the userinput.
@@ -91,21 +91,21 @@ public class UserInterface {
 		}
 		return Number;
 	}
-	
+
 	/**
 	 * Sends a help message to the user, for more information about the program
 	 */
 	public void Help() {
 		System.out.println("Der Aufruf muss wie folgt aussehen:\n"
-							+ "\n"
-						    + "java TippreihenOhneUnglueck [eurojackpot | lotto | unglueckszahlen [ ausgabe | eingabe ]]\n"
-					    	+ "\n"
-		    				+ "'eurojackpot'             für den Eurojackpot Generator \n" 
-		    				+ "'lotto'                   für den Lotto Generator\n" 
-	        				+ "'unglueckszahlen ausgabe' gibt die Unglückszahlen aus\n"
-	        				+ "'unglueckszahlen eingabe' startet die Eingabe neuer Unglückszahlen" );
+				+ "\n"
+				+ "java TippreihenOhneUnglueck [eurojackpot | lotto | unglueckszahlen [ ausgabe | eingabe ]]\n"
+				+ "\n"
+				+ "'eurojackpot'             für den Eurojackpot Generator \n" 
+				+ "'lotto'                   für den Lotto Generator\n" 
+				+ "'unglueckszahlen ausgabe' gibt die Unglückszahlen aus\n"
+				+ "'unglueckszahlen eingabe' startet die Eingabe neuer Unglückszahlen" );
 	}
-	
+
 	/**
 	 * Sends a help message to the user, for more information about the unlucky numbers
 	 */

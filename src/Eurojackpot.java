@@ -10,14 +10,14 @@ import java.util.logging.Logger;
  */
 public class Eurojackpot extends LottoBase implements ILottoBase {
 	private Zusatzziehung Zusatz;
-	
+
 	public Eurojackpot(int[] UnluckyNumbers, Logger Log) {
 		super(50, UnluckyNumbers, Log);
-	    Log.info("Der User hat den Eurojackpot Generator gestartet");
-		
+		Log.info("Der User hat den Eurojackpot Generator gestartet");
+
 		Zusatz = new Zusatzziehung(UnluckyNumbers, Log);
 	}
-	
+
 	/**
 	 * This method creates a String with a list winning numbers and additional winning numbers from the class "Zusatzziehung". 
 	 * 
@@ -33,7 +33,7 @@ public class Eurojackpot extends LottoBase implements ILottoBase {
 		ReturnVal += "\n" + Zusatz.GetNumbersString();
 
 
-	    Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal);
+		Log.info("Es wurden folgende Zahlen gezogen: " + ReturnVal);
 		return ReturnVal;
 	}
 }
